@@ -34,3 +34,13 @@ exports.verifyOrdinaryUser = function(req, res, next) {
         return next(err);
     }
 };
+exports.verifyAdmin = function(req, res, next) {
+    if (req.decoded._doc.admin) {
+        console.log("Admin!")
+        next();
+    } else {
+        var err = new Error('You are not an Admin!');
+        err.status = 401;
+        return next(err);
+    }
+}
